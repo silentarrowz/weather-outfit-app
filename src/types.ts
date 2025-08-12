@@ -1,4 +1,4 @@
-  export interface WeatherData {
+export interface WeatherData {
   city: string;
   tempC: number;
   condition: string;
@@ -10,8 +10,10 @@
 }
 
 export interface WeatherState {
+  history: string[];
   currentWeather: WeatherData | null;
   loading: boolean;
+  addToHistory: (city: string) => void;
   setCurrentWeather: (data: WeatherData | null) => void;
   setLoading: (v: boolean) => void;
 }
