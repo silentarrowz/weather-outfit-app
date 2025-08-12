@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { Input, Button } from 'antd';
+import { Input, Button, Card } from 'antd';
 
 import './App.css'
 
@@ -20,9 +20,10 @@ function App() {
   const fetchWeather = async (city: string) => {
     console.log('input : ', city);
     const key = import.meta.env.VITE_API_KEY;
+    const apiUrl = import.meta.env.VITE_API_URL;
     try {
       if (!key) throw new Error('NO_API_KEY');
-      const res = await fetch(`https://api.openweathermap.org/data/2.5/weather?q=${encodeURIComponent(city)}&units=metric&appid=${key}`);
+      const res = await fetch(`${apiUrl}?q=${encodeURIComponent(city)}&units=metric&appid=${key}`);
       if (!res.ok) {
         if (res.status === 404) throw new Error('CITY_NOT_FOUND');
         throw new Error('API_ERROR');
@@ -77,13 +78,13 @@ function App() {
         </Button>
       </div>
           {weather && (
-            <div className="mt-4">
+            <Card>
               <div>City: {weather.city}</div>
               <div>Temperature: {weather.tempC}°C</div>
               <div>Condition: {weather.conditionDesc}</div>
               <div>Wind: {weather.wind} m/s</div>
               <div>Humidity: {weather.humidity}%</div>
-            </div>
+            </Card>
           )}
         </main>
       </div>
