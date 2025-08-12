@@ -1,21 +1,14 @@
 import { useState } from 'react'
 import { Input, Button, Card } from 'antd';
-
+import type { WeatherData } from './types';
 import './App.css'
+import { WeatherCard } from './components/WeatherCard';
+import { useWeatherStore } from './stores/useWeatherStore';
 
 function App() {
   const [input, setInput]= useState('');
-  const [weather, setCurrentWeather] = useState<WeatherData | null>(null);
-  interface WeatherData {
-  city: string;
-  tempC: number;
-  condition: string;
-  conditionDesc: string;
-  wind: number | null;
-  humidity: number | null;
-  raw: any;
-  fetchedAt: number;
-}
+  const { setCurrentWeather, setLoading } = useWeatherStore();
+
 
   const fetchWeather = async (city: string) => {
     console.log('input : ', city);
@@ -77,15 +70,7 @@ function App() {
           Search
         </Button>
       </div>
-          {weather && (
-            <Card>
-              <div>City: {weather.city}</div>
-              <div>Temperature: {weather.tempC}°C</div>
-              <div>Condition: {weather.conditionDesc}</div>
-              <div>Wind: {weather.wind} m/s</div>
-              <div>Humidity: {weather.humidity}%</div>
-            </Card>
-          )}
+          <WeatherCard />
         </main>
       </div>
     </div>
