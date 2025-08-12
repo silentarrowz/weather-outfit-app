@@ -1,13 +1,10 @@
-import { useState } from "react";
-import { Input, Button, Card } from "antd";
-import type { WeatherData } from "./types";
-import "./App.css";
 import { WeatherCard } from "./components/WeatherCard";
 import SearchBox from "./components/SearchBox";
 import { HistoryList } from "./components/HistoryList";
+import "./App.css";
 
 function App() {
-  const [input, setInput] = useState("");
+  
 
   return (
     <div className={"min-h-screen py-8 px-4 "}>
